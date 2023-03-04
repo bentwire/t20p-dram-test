@@ -3,4 +3,3 @@
 `define Count_R
 `define Count_W
 `define En_Reset
-`define Reset_Synchronization

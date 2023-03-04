@@ -8,13 +8,18 @@
         <File path="src/ddr3_memory_interface/ddr3_memory_interface.v" type="file.verilog" enable="1"/>
         <File path="src/fifo_hs/read_fifo_16x128_256x8_hs.v" type="file.verilog" enable="1"/>
         <File path="src/fifo_hs/write_fifo_256x8_16x128_hs.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_dcs/gowin_dcs.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_rpll/dynamic_1_10_2_6_3_rpll.v" type="file.verilog" enable="0"/>
         <File path="src/gowin_rpll/mem_rpll.v" type="file.verilog" enable="1"/>
         <File path="src/gowin_rpll/sys_rpll.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_sdpb/read_ram_16x128_256x8_sdpb.v" type="file.verilog" enable="0"/>
+        <File path="src/gowin_sp/ram256x8_sp.v" type="file.verilog" enable="1"/>
         <File path="src/print.v" type="file.verilog" enable="0"/>
         <File path="src/top.sv" type="file.verilog" enable="1"/>
         <File path="src/uart_tx_V2.v" type="file.verilog" enable="0"/>
         <File path="src/dram-test.cst" type="file.cst" enable="1"/>
         <File path="src/dram-test.sdc" type="file.sdc" enable="1"/>
         <File path="src/ddr3_memory_interface/ddr3_memory_interface.ipc" type="file.other" enable="1"/>
+        <File path="src/gowin_rpll/sys_rpll.ipc" type="file.other" enable="1"/>
     </FileList>
 </Project>

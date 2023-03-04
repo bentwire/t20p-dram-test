@@ -1,8 +1,8 @@
 //Copyright (C)2014-2022 Gowin Semiconductor Corporation.
 //All rights reserved.
 //File Title: Post-PnR Simulation Model file
-//GOWIN Version: V1.9.8.10
-//Created Time: Wed Feb 22 20:43:13 2023
+//GOWIN Version: V1.9.8.09 Education
+//Created Time: Fri Mar 03 19:38:22 2023
 
 `timescale 100 ps/100 ps
 module READ_FIFO_HS_Top(

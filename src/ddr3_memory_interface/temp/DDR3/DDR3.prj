@@ -4,14 +4,14 @@
     <Version>beta</Version>
     <Device id="GW2A-18C" package="PBGA256" speed="8" partNumber="GW2A-LV18PG256C8/I7"/>
     <FileList>
-        <File path="/home/mike/gowin/IDE/ipcore/DDR3/data/ddr3_1_4/ddr3_1_4code.v" type="verilog"/>
-        <File path="/home/mike/gowin/IDE/ipcore/DDR3/data/ddr3_1_4/DDR3_TOP.v" type="verilog"/>
+        <File path="C:/Gowin/Gowin_V1.9.8.09_Education/IDE/ipcore/DDR3/data/ddr3_1_4/ddr3_1_4code.v" type="verilog"/>
+        <File path="C:/Gowin/Gowin_V1.9.8.09_Education/IDE/ipcore/DDR3/data/ddr3_1_4/DDR3_TOP.v" type="verilog"/>
     </FileList>
     <OptionList>
         <Option type="disable_insert_pad" value="1"/>
         <Option type="dsp_balance" value="1"/>
-        <Option type="include_path" value="/home/mike/gowin/IDE/ipcore/DDR3/data/ddr3_1_4"/>
-        <Option type="include_path" value="/home/mike/gowin/projects/dram-test/src/ddr3_memory_interface/temp/DDR3"/>
+        <Option type="include_path" value="C:/Gowin/Gowin_V1.9.8.09_Education/IDE/ipcore/DDR3/data/ddr3_1_4"/>
+        <Option type="include_path" value="F:/dram-test/src/ddr3_memory_interface/temp/DDR3"/>
         <Option type="output_file" value="ddr3_memory_interface.vg"/>
         <Option type="output_template" value="ddr3_memory_interface_tmp.v"/>
         <Option type="ram_balance" value="1"/>

@@ -1,13 +1,14 @@
 //Copyright (C)2014-2022 Gowin Semiconductor Corporation.
 //All rights reserved.
 //File Title: Post-PnR Simulation Model file
-//GOWIN Version: V1.9.8.10
-//Created Time: Fri Feb 24 23:46:39 2023
+//GOWIN Version: V1.9.8.09 Education
+//Created Time: Fri Mar 03 19:38:39 2023
 
 `timescale 100 ps/100 ps
 module WRITE_FIFO_HS_Top(
 	Data,
-	Reset,
+	WrReset,
+	RdReset,
 	WrClk,
 	RdClk,
 	WrEn,
@@ -19,7 +20,8 @@ module WRITE_FIFO_HS_Top(
 	Full
 );
 input [7:0] Data;
-input Reset;
+input WrReset;
+input RdReset;
 input WrClk;
 input RdClk;
 input WrEn;
@@ -36,18 +38,19 @@ wire GND;
 wire [127:0] Q;
 wire RdClk;
 wire RdEn;
-wire Reset;
+wire RdReset;
 wire [4:0] Rnum;
 wire VCC;
 wire [8:0] Wnum;
 wire WrClk;
 wire WrEn;
-wire \fifo_inst/n27_3 ;
-wire \fifo_inst/n664_3 ;
+wire WrReset;
+wire \fifo_inst/n19_3 ;
+wire \fifo_inst/n656_3 ;
 wire \fifo_inst/wfull_val ;
-wire \fifo_inst/n732_3 ;
-wire \fifo_inst/n842_3 ;
-wire \fifo_inst/n1106_3 ;
+wire \fifo_inst/n724_3 ;
+wire \fifo_inst/n834_3 ;
+wire \fifo_inst/n1094_3 ;
 wire \fifo_inst/wfull_val1 ;
 wire \fifo_inst/Big.wbin_num_next_0_7 ;
 wire \fifo_inst/Big.wgraynext_1_4 ;
@@ -57,7 +60,7 @@ wire \fifo_inst/wfull_val_5 ;
 wire \fifo_inst/Big.wgraynext_0_5 ;
 wire \fifo_inst/Big.wgraynext_1_5 ;
 wire \fifo_inst/Big.wgraynext_0_7 ;
-wire \fifo_inst/n23_7 ;
+wire \fifo_inst/n15_7 ;
 wire \fifo_inst/Big.rgraynext_1_6 ;
 wire \fifo_inst/rbin_num_next_0_9 ;
 wire \fifo_inst/rempty_val ;
@@ -77,14 +80,14 @@ wire \fifo_inst/wcnt_sub_5_3 ;
 wire \fifo_inst/wcnt_sub_6_3 ;
 wire \fifo_inst/wcnt_sub_7_3 ;
 wire \fifo_inst/wcnt_sub_8_0_COUT ;
-wire \fifo_inst/n640_1_SUM ;
-wire \fifo_inst/n640_3 ;
-wire \fifo_inst/n641_1_SUM ;
-wire \fifo_inst/n641_3 ;
-wire \fifo_inst/n642_1_SUM ;
-wire \fifo_inst/n642_3 ;
-wire \fifo_inst/n643_1_SUM ;
-wire \fifo_inst/n643_3 ;
+wire \fifo_inst/n632_1_SUM ;
+wire \fifo_inst/n632_3 ;
+wire \fifo_inst/n633_1_SUM ;
+wire \fifo_inst/n633_3 ;
+wire \fifo_inst/n634_1_SUM ;
+wire \fifo_inst/n634_3 ;
+wire \fifo_inst/n635_1_SUM ;
+wire \fifo_inst/n635_3 ;
 wire \fifo_inst/wfull_val1_14 ;
 wire [3:0] \fifo_inst/Big.rgraynext ;
 wire [3:0] \fifo_inst/Big.wcount_r ;
@@ -92,19 +95,17 @@ wire [3:0] \fifo_inst/Big.wgraynext ;
 wire [7:4] \fifo_inst/Big.rcount_w_1 ;
 wire [4:1] \fifo_inst/rbin_num_next ;
 wire [8:1] \fifo_inst/Big.wbin_num_next ;
-wire [4:0] \fifo_inst/rbin_num ;
+wire [3:0] \fifo_inst/rbin_num ;
 wire [4:0] \fifo_inst/Big.wq1_rptr ;
 wire [4:0] \fifo_inst/Big.wq2_rptr ;
 wire [4:0] \fifo_inst/Big.rq1_wptr ;
 wire [4:0] \fifo_inst/Big.rq2_wptr ;
-wire [3:0] \fifo_inst/Big.rptr ;
+wire [4:0] \fifo_inst/Big.rptr ;
 wire [4:0] \fifo_inst/Big.wptr ;
 wire [7:0] \fifo_inst/Big.wbin ;
 wire [4:0] \fifo_inst/Big.wcount_r_d ;
 wire [4:4] \fifo_inst/Big.rcount_w_d ;
 wire [7:4] \fifo_inst/Big.rcount_w_1_d ;
-wire [1:0] \fifo_inst/reset_r ;
-wire [1:0] \fifo_inst/reset_w ;
 wire [4:0] \fifo_inst/rcnt_sub ;
 wire [8:4] \fifo_inst/wcnt_sub ;
 VCC VCC_cZ (
@@ -116,12 +117,12 @@ GND GND_cZ (
 GSR GSR (
 	.GSRI(VCC)
 );
-LUT2 \fifo_inst/n27_s0  (
+LUT2 \fifo_inst/n19_s0  (
 	.I0(Empty),
 	.I1(RdEn),
-	.F(\fifo_inst/n27_3 )
+	.F(\fifo_inst/n19_3 )
 );
-defparam \fifo_inst/n27_s0 .INIT=4'h4;
+defparam \fifo_inst/n19_s0 .INIT=4'h4;
 LUT3 \fifo_inst/Big.rgraynext_1_s0  (
 	.I0(\fifo_inst/Big.rgraynext_1_6 ),
 	.I1(\fifo_inst/rbin_num_next [1]),
@@ -140,7 +141,7 @@ LUT4 \fifo_inst/Big.rgraynext_3_s0  (
 	.I0(\fifo_inst/Big.rgraynext_1_6 ),
 	.I1(\fifo_inst/rbin_num [2]),
 	.I2(\fifo_inst/rbin_num [3]),
-	.I3(\fifo_inst/rbin_num [4]),
+	.I3(\fifo_inst/Big.rptr [4]),
 	.F(\fifo_inst/Big.rgraynext [3])
 );
 defparam \fifo_inst/Big.rgraynext_3_s0 .INIT=16'h07F8;
@@ -157,12 +158,12 @@ LUT3 \fifo_inst/Big.wcount_r_0_s0  (
 	.F(\fifo_inst/Big.wcount_r [0])
 );
 defparam \fifo_inst/Big.wcount_r_0_s0 .INIT=8'h96;
-LUT2 \fifo_inst/n664_s0  (
-	.I0(\fifo_inst/rbin_num [4]),
+LUT2 \fifo_inst/n656_s0  (
+	.I0(\fifo_inst/Big.rptr [4]),
 	.I1(\fifo_inst/Big.wcount_r_d [4]),
-	.F(\fifo_inst/n664_3 )
+	.F(\fifo_inst/n656_3 )
 );
-defparam \fifo_inst/n664_s0 .INIT=4'h6;
+defparam \fifo_inst/n656_s0 .INIT=4'h6;
 LUT4 \fifo_inst/Big.wgraynext_0_s0  (
 	.I0(\fifo_inst/Big.wgraynext_0_7 ),
 	.I1(\fifo_inst/Big.wbin [3]),
@@ -213,24 +214,24 @@ LUT3 \fifo_inst/Big.rcount_w_1_4_s0  (
 	.F(\fifo_inst/Big.rcount_w_1 [4])
 );
 defparam \fifo_inst/Big.rcount_w_1_4_s0 .INIT=8'h96;
-LUT2 \fifo_inst/n732_s0  (
+LUT2 \fifo_inst/n724_s0  (
 	.I0(\fifo_inst/Big.wptr [4]),
 	.I1(\fifo_inst/Big.rcount_w_d [4]),
-	.F(\fifo_inst/n732_3 )
+	.F(\fifo_inst/n724_3 )
 );
-defparam \fifo_inst/n732_s0 .INIT=4'h6;
-LUT2 \fifo_inst/n842_s0  (
+defparam \fifo_inst/n724_s0 .INIT=4'h6;
+LUT2 \fifo_inst/n834_s0  (
 	.I0(\fifo_inst/rempty_val ),
-	.I1(\fifo_inst/reset_r [1]),
-	.F(\fifo_inst/n842_3 )
+	.I1(RdReset),
+	.F(\fifo_inst/n834_3 )
 );
-defparam \fifo_inst/n842_s0 .INIT=4'hE;
-LUT2 \fifo_inst/n1106_s0  (
-	.I0(\fifo_inst/reset_w [1]),
+defparam \fifo_inst/n834_s0 .INIT=4'hE;
+LUT2 \fifo_inst/n1094_s0  (
+	.I0(WrReset),
 	.I1(\fifo_inst/wfull_val ),
-	.F(\fifo_inst/n1106_3 )
+	.F(\fifo_inst/n1094_3 )
 );
-defparam \fifo_inst/n1106_s0 .INIT=4'h4;
+defparam \fifo_inst/n1094_s0 .INIT=4'h4;
 LUT3 \fifo_inst/wfull_val1_s6  (
 	.I0(\fifo_inst/wfull_val1_3 ),
 	.I1(\fifo_inst/wfull_val1_2 ),
@@ -262,25 +263,25 @@ LUT4 \fifo_inst/rbin_num_next_4_s2  (
 	.I0(\fifo_inst/Big.rgraynext_1_6 ),
 	.I1(\fifo_inst/rbin_num [2]),
 	.I2(\fifo_inst/rbin_num [3]),
-	.I3(\fifo_inst/rbin_num [4]),
+	.I3(\fifo_inst/Big.rptr [4]),
 	.F(\fifo_inst/rbin_num_next [4])
 );
 defparam \fifo_inst/rbin_num_next_4_s2 .INIT=16'h7F80;
 LUT2 \fifo_inst/Big.wbin_num_next_0_s3  (
-	.I0(\fifo_inst/n23_7 ),
+	.I0(\fifo_inst/n15_7 ),
 	.I1(\fifo_inst/Big.wbin [0]),
 	.F(\fifo_inst/Big.wbin_num_next_0_7 )
 );
 defparam \fifo_inst/Big.wbin_num_next_0_s3 .INIT=4'h6;
 LUT3 \fifo_inst/Big.wbin_num_next_1_s3  (
-	.I0(\fifo_inst/n23_7 ),
+	.I0(\fifo_inst/n15_7 ),
 	.I1(\fifo_inst/Big.wbin [0]),
 	.I2(\fifo_inst/Big.wbin [1]),
 	.F(\fifo_inst/Big.wbin_num_next [1])
 );
 defparam \fifo_inst/Big.wbin_num_next_1_s3 .INIT=8'h78;
 LUT4 \fifo_inst/Big.wbin_num_next_2_s3  (
-	.I0(\fifo_inst/n23_7 ),
+	.I0(\fifo_inst/n15_7 ),
 	.I1(\fifo_inst/Big.wbin [0]),
 	.I2(\fifo_inst/Big.wbin [1]),
 	.I3(\fifo_inst/Big.wbin [2]),
@@ -354,7 +355,7 @@ defparam \fifo_inst/wfull_val_s1 .INIT=16'h9009;
 LUT4 \fifo_inst/wfull_val_s2  (
 	.I0(\fifo_inst/Big.wptr [3]),
 	.I1(\fifo_inst/Big.wptr [4]),
-	.I2(\fifo_inst/rbin_num [4]),
+	.I2(\fifo_inst/Big.rptr [4]),
 	.I3(\fifo_inst/Big.rptr [3]),
 	.F(\fifo_inst/wfull_val_5 )
 );
@@ -395,14 +396,14 @@ LUT4 \fifo_inst/Big.wgraynext_0_s3  (
 	.F(\fifo_inst/Big.wgraynext_0_7 )
 );
 defparam \fifo_inst/Big.wgraynext_0_s3 .INIT=16'h3500;
-LUT4 \fifo_inst/n23_s2  (
+LUT4 \fifo_inst/n15_s2  (
 	.I0(\fifo_inst/Full_1 ),
 	.I1(\fifo_inst/Full_2 ),
 	.I2(\fifo_inst/wfull_val1_9 ),
 	.I3(WrEn),
-	.F(\fifo_inst/n23_7 )
+	.F(\fifo_inst/n15_7 )
 );
-defparam \fifo_inst/n23_s2 .INIT=16'h3500;
+defparam \fifo_inst/n15_s2 .INIT=16'h3500;
 LUT4 \fifo_inst/Big.rgraynext_1_s2  (
 	.I0(Empty),
 	.I1(RdEn),
@@ -428,8 +429,8 @@ LUT3 \fifo_inst/rbin_num_next_0_s4  (
 defparam \fifo_inst/rbin_num_next_0_s4 .INIT=8'hB4;
 LUT3 \fifo_inst/rempty_val_s2  (
 	.I0(\fifo_inst/Big.wptr [4]),
-	.I1(\fifo_inst/rbin_num [4]),
-	.I2(\fifo_inst/n643_3 ),
+	.I1(\fifo_inst/Big.rptr [4]),
+	.I2(\fifo_inst/n635_3 ),
 	.F(\fifo_inst/rempty_val )
 );
 defparam \fifo_inst/rempty_val_s2 .INIT=8'h09;
@@ -457,553 +458,525 @@ LUT4 \fifo_inst/Big.wcount_r_1_s1  (
 	.F(\fifo_inst/Big.wcount_r [1])
 );
 defparam \fifo_inst/Big.wcount_r_1_s1 .INIT=16'h6996;
-DFFC \fifo_inst/rbin_num_4_s0  (
-	.D(\fifo_inst/rbin_num_next [4]),
-	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
-	.Q(\fifo_inst/rbin_num [4])
-);
-defparam \fifo_inst/rbin_num_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/rbin_num_3_s0  (
 	.D(\fifo_inst/rbin_num_next [3]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/rbin_num [3])
 );
 defparam \fifo_inst/rbin_num_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/rbin_num_2_s0  (
 	.D(\fifo_inst/rbin_num_next [2]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/rbin_num [2])
 );
 defparam \fifo_inst/rbin_num_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/rbin_num_1_s0  (
 	.D(\fifo_inst/rbin_num_next [1]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/rbin_num [1])
 );
 defparam \fifo_inst/rbin_num_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/rbin_num_0_s0  (
 	.D(\fifo_inst/rbin_num_next_0_9 ),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/rbin_num [0])
 );
 defparam \fifo_inst/rbin_num_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq1_rptr_4_s0  (
-	.D(\fifo_inst/rbin_num [4]),
+	.D(\fifo_inst/Big.rptr [4]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq1_rptr [4])
 );
 defparam \fifo_inst/Big.wq1_rptr_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq1_rptr_3_s0  (
 	.D(\fifo_inst/Big.rptr [3]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq1_rptr [3])
 );
 defparam \fifo_inst/Big.wq1_rptr_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq1_rptr_2_s0  (
 	.D(\fifo_inst/Big.rptr [2]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq1_rptr [2])
 );
 defparam \fifo_inst/Big.wq1_rptr_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq1_rptr_1_s0  (
 	.D(\fifo_inst/Big.rptr [1]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq1_rptr [1])
 );
 defparam \fifo_inst/Big.wq1_rptr_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq1_rptr_0_s0  (
 	.D(\fifo_inst/Big.rptr [0]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq1_rptr [0])
 );
 defparam \fifo_inst/Big.wq1_rptr_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq2_rptr_4_s0  (
 	.D(\fifo_inst/Big.wq1_rptr [4]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq2_rptr [4])
 );
 defparam \fifo_inst/Big.wq2_rptr_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq2_rptr_3_s0  (
 	.D(\fifo_inst/Big.wq1_rptr [3]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq2_rptr [3])
 );
 defparam \fifo_inst/Big.wq2_rptr_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq2_rptr_2_s0  (
 	.D(\fifo_inst/Big.wq1_rptr [2]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq2_rptr [2])
 );
 defparam \fifo_inst/Big.wq2_rptr_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq2_rptr_1_s0  (
 	.D(\fifo_inst/Big.wq1_rptr [1]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq2_rptr [1])
 );
 defparam \fifo_inst/Big.wq2_rptr_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wq2_rptr_0_s0  (
 	.D(\fifo_inst/Big.wq1_rptr [0]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wq2_rptr [0])
 );
 defparam \fifo_inst/Big.wq2_rptr_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq1_wptr_4_s0  (
 	.D(\fifo_inst/Big.wptr [4]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq1_wptr [4])
 );
 defparam \fifo_inst/Big.rq1_wptr_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq1_wptr_3_s0  (
 	.D(\fifo_inst/Big.wptr [3]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq1_wptr [3])
 );
 defparam \fifo_inst/Big.rq1_wptr_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq1_wptr_2_s0  (
 	.D(\fifo_inst/Big.wptr [2]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq1_wptr [2])
 );
 defparam \fifo_inst/Big.rq1_wptr_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq1_wptr_1_s0  (
 	.D(\fifo_inst/Big.wptr [1]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq1_wptr [1])
 );
 defparam \fifo_inst/Big.rq1_wptr_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq1_wptr_0_s0  (
 	.D(\fifo_inst/Big.wptr [0]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq1_wptr [0])
 );
 defparam \fifo_inst/Big.rq1_wptr_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq2_wptr_4_s0  (
 	.D(\fifo_inst/Big.rq1_wptr [4]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq2_wptr [4])
 );
 defparam \fifo_inst/Big.rq2_wptr_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq2_wptr_3_s0  (
 	.D(\fifo_inst/Big.rq1_wptr [3]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq2_wptr [3])
 );
 defparam \fifo_inst/Big.rq2_wptr_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq2_wptr_2_s0  (
 	.D(\fifo_inst/Big.rq1_wptr [2]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq2_wptr [2])
 );
 defparam \fifo_inst/Big.rq2_wptr_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq2_wptr_1_s0  (
 	.D(\fifo_inst/Big.rq1_wptr [1]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq2_wptr [1])
 );
 defparam \fifo_inst/Big.rq2_wptr_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rq2_wptr_0_s0  (
 	.D(\fifo_inst/Big.rq1_wptr [0]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rq2_wptr [0])
 );
 defparam \fifo_inst/Big.rq2_wptr_0_s0 .INIT=1'b0;
+DFFC \fifo_inst/Big.rptr_4_s0  (
+	.D(\fifo_inst/rbin_num_next [4]),
+	.CLK(RdClk),
+	.CLEAR(RdReset),
+	.Q(\fifo_inst/Big.rptr [4])
+);
+defparam \fifo_inst/Big.rptr_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rptr_3_s0  (
 	.D(\fifo_inst/Big.rgraynext [3]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rptr [3])
 );
 defparam \fifo_inst/Big.rptr_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rptr_2_s0  (
 	.D(\fifo_inst/Big.rgraynext [2]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rptr [2])
 );
 defparam \fifo_inst/Big.rptr_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rptr_1_s0  (
 	.D(\fifo_inst/Big.rgraynext [1]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rptr [1])
 );
 defparam \fifo_inst/Big.rptr_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rptr_0_s0  (
 	.D(\fifo_inst/Big.rgraynext [0]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.rptr [0])
 );
 defparam \fifo_inst/Big.rptr_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wptr_4_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [8]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wptr [4])
 );
 defparam \fifo_inst/Big.wptr_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wptr_3_s0  (
 	.D(\fifo_inst/Big.wgraynext [3]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wptr [3])
 );
 defparam \fifo_inst/Big.wptr_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wptr_2_s0  (
 	.D(\fifo_inst/Big.wgraynext [2]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wptr [2])
 );
 defparam \fifo_inst/Big.wptr_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wptr_1_s0  (
 	.D(\fifo_inst/Big.wgraynext [1]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wptr [1])
 );
 defparam \fifo_inst/Big.wptr_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wptr_0_s0  (
 	.D(\fifo_inst/Big.wgraynext [0]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wptr [0])
 );
 defparam \fifo_inst/Big.wptr_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_7_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [7]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [7])
 );
 defparam \fifo_inst/Big.wbin_7_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_6_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [6]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [6])
 );
 defparam \fifo_inst/Big.wbin_6_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_5_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [5]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [5])
 );
 defparam \fifo_inst/Big.wbin_5_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_4_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [4]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [4])
 );
 defparam \fifo_inst/Big.wbin_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_3_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [3]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [3])
 );
 defparam \fifo_inst/Big.wbin_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_2_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [2]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [2])
 );
 defparam \fifo_inst/Big.wbin_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_1_s0  (
 	.D(\fifo_inst/Big.wbin_num_next [1]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [1])
 );
 defparam \fifo_inst/Big.wbin_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wbin_0_s0  (
 	.D(\fifo_inst/Big.wbin_num_next_0_7 ),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.wbin [0])
 );
 defparam \fifo_inst/Big.wbin_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wcount_r_d_4_s0  (
 	.D(\fifo_inst/Big.rq2_wptr [4]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.wcount_r_d [4])
 );
 defparam \fifo_inst/Big.wcount_r_d_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wcount_r_d_3_s0  (
 	.D(\fifo_inst/Big.wcount_r [3]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.wcount_r_d [3])
 );
 defparam \fifo_inst/Big.wcount_r_d_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wcount_r_d_2_s0  (
 	.D(\fifo_inst/Big.wcount_r [2]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.wcount_r_d [2])
 );
 defparam \fifo_inst/Big.wcount_r_d_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wcount_r_d_1_s0  (
 	.D(\fifo_inst/Big.wcount_r [1]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.wcount_r_d [1])
 );
 defparam \fifo_inst/Big.wcount_r_d_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.wcount_r_d_0_s0  (
 	.D(\fifo_inst/Big.wcount_r [0]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(\fifo_inst/Big.wcount_r_d [0])
 );
 defparam \fifo_inst/Big.wcount_r_d_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rcount_w_d_4_s0  (
 	.D(\fifo_inst/Big.wq2_rptr [4]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.rcount_w_d [4])
 );
 defparam \fifo_inst/Big.rcount_w_d_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rcount_w_1_d_7_s0  (
 	.D(\fifo_inst/Big.rcount_w_1 [7]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.rcount_w_1_d [7])
 );
 defparam \fifo_inst/Big.rcount_w_1_d_7_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rcount_w_1_d_6_s0  (
 	.D(\fifo_inst/Big.rcount_w_1 [6]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.rcount_w_1_d [6])
 );
 defparam \fifo_inst/Big.rcount_w_1_d_6_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rcount_w_1_d_5_s0  (
 	.D(\fifo_inst/Big.rcount_w_1 [5]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.rcount_w_1_d [5])
 );
 defparam \fifo_inst/Big.rcount_w_1_d_5_s0 .INIT=1'b0;
 DFFC \fifo_inst/Big.rcount_w_1_d_4_s0  (
 	.D(\fifo_inst/Big.rcount_w_1 [4]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Big.rcount_w_1_d [4])
 );
 defparam \fifo_inst/Big.rcount_w_1_d_4_s0 .INIT=1'b0;
 DFFP \fifo_inst/rempty_val1_s0  (
 	.D(\fifo_inst/rempty_val ),
 	.CLK(RdClk),
-	.PRESET(\fifo_inst/n842_3 ),
+	.PRESET(\fifo_inst/n834_3 ),
 	.Q(\fifo_inst/rempty_val1 )
 );
 defparam \fifo_inst/rempty_val1_s0 .INIT=1'b1;
 DFFP \fifo_inst/Empty_s0  (
 	.D(\fifo_inst/rempty_val1 ),
 	.CLK(RdClk),
-	.PRESET(\fifo_inst/n842_3 ),
+	.PRESET(\fifo_inst/n834_3 ),
 	.Q(Empty)
 );
 defparam \fifo_inst/Empty_s0 .INIT=1'b1;
 DFFC \fifo_inst/Wnum_8_s0  (
 	.D(\fifo_inst/wcnt_sub [8]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[8])
 );
 defparam \fifo_inst/Wnum_8_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_7_s0  (
 	.D(\fifo_inst/wcnt_sub [7]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[7])
 );
 defparam \fifo_inst/Wnum_7_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_6_s0  (
 	.D(\fifo_inst/wcnt_sub [6]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[6])
 );
 defparam \fifo_inst/Wnum_6_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_5_s0  (
 	.D(\fifo_inst/wcnt_sub [5]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[5])
 );
 defparam \fifo_inst/Wnum_5_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_4_s0  (
 	.D(\fifo_inst/wcnt_sub [4]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[4])
 );
 defparam \fifo_inst/Wnum_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_3_s0  (
 	.D(\fifo_inst/Big.wbin [3]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[3])
 );
 defparam \fifo_inst/Wnum_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_2_s0  (
 	.D(\fifo_inst/Big.wbin [2]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[2])
 );
 defparam \fifo_inst/Wnum_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_1_s0  (
 	.D(\fifo_inst/Big.wbin [1]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[1])
 );
 defparam \fifo_inst/Wnum_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Wnum_0_s0  (
 	.D(\fifo_inst/Big.wbin [0]),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(Wnum[0])
 );
 defparam \fifo_inst/Wnum_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/Rnum_4_s0  (
 	.D(\fifo_inst/rcnt_sub [4]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(Rnum[4])
 );
 defparam \fifo_inst/Rnum_4_s0 .INIT=1'b0;
 DFFC \fifo_inst/Rnum_3_s0  (
 	.D(\fifo_inst/rcnt_sub [3]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(Rnum[3])
 );
 defparam \fifo_inst/Rnum_3_s0 .INIT=1'b0;
 DFFC \fifo_inst/Rnum_2_s0  (
 	.D(\fifo_inst/rcnt_sub [2]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(Rnum[2])
 );
 defparam \fifo_inst/Rnum_2_s0 .INIT=1'b0;
 DFFC \fifo_inst/Rnum_1_s0  (
 	.D(\fifo_inst/rcnt_sub [1]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(Rnum[1])
 );
 defparam \fifo_inst/Rnum_1_s0 .INIT=1'b0;
 DFFC \fifo_inst/Rnum_0_s0  (
 	.D(\fifo_inst/rcnt_sub [0]),
 	.CLK(RdClk),
-	.CLEAR(\fifo_inst/reset_r [1]),
+	.CLEAR(RdReset),
 	.Q(Rnum[0])
 );
 defparam \fifo_inst/Rnum_0_s0 .INIT=1'b0;
 DFFC \fifo_inst/wfull_val1_s0  (
 	.D(\fifo_inst/wfull_val ),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/wfull_val1_2 )
 );
 defparam \fifo_inst/wfull_val1_s0 .INIT=1'b0;
 DFFP \fifo_inst/wfull_val1_s1  (
 	.D(\fifo_inst/wfull_val ),
 	.CLK(WrClk),
-	.PRESET(\fifo_inst/n1106_3 ),
+	.PRESET(\fifo_inst/n1094_3 ),
 	.Q(\fifo_inst/wfull_val1_3 )
 );
 defparam \fifo_inst/wfull_val1_s1 .INIT=1'b1;
 DFFC \fifo_inst/Full_s0  (
 	.D(\fifo_inst/wfull_val1 ),
 	.CLK(WrClk),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.Q(\fifo_inst/Full_1 )
 );
 defparam \fifo_inst/Full_s0 .INIT=1'b0;
 DFFP \fifo_inst/Full_s1  (
 	.D(\fifo_inst/wfull_val1 ),
 	.CLK(WrClk),
-	.PRESET(\fifo_inst/n1106_3 ),
+	.PRESET(\fifo_inst/n1094_3 ),
 	.Q(\fifo_inst/Full_2 )
 );
 defparam \fifo_inst/Full_s1 .INIT=1'b1;
 DLCE \fifo_inst/wfull_val1_s4  (
-	.D(\fifo_inst/n1106_3 ),
+	.D(\fifo_inst/n1094_3 ),
 	.G(\fifo_inst/wfull_val ),
-	.CLEAR(\fifo_inst/reset_w [1]),
+	.CLEAR(WrReset),
 	.CE(\fifo_inst/wfull_val1_14 ),
 	.Q(\fifo_inst/wfull_val1_9 )
 );
 defparam \fifo_inst/wfull_val1_s4 .INIT=1'b0;
-DFFNP \fifo_inst/reset_r_0_s1  (
-	.D(GND),
-	.CLK(RdClk),
-	.PRESET(Reset),
-	.Q(\fifo_inst/reset_r [0])
-);
-defparam \fifo_inst/reset_r_0_s1 .INIT=1'b1;
-DFFNP \fifo_inst/reset_w_1_s1  (
-	.D(\fifo_inst/reset_w [0]),
-	.CLK(WrClk),
-	.PRESET(Reset),
-	.Q(\fifo_inst/reset_w [1])
-);
-defparam \fifo_inst/reset_w_1_s1 .INIT=1'b1;
-DFFNP \fifo_inst/reset_w_0_s1  (
-	.D(GND),
-	.CLK(WrClk),
-	.PRESET(Reset),
-	.Q(\fifo_inst/reset_w [0])
-);
-defparam \fifo_inst/reset_w_0_s1 .INIT=1'b1;
-DFFNP \fifo_inst/reset_r_1_s1  (
-	.D(\fifo_inst/reset_r [0]),
-	.CLK(RdClk),
-	.PRESET(Reset),
-	.Q(\fifo_inst/reset_r [1])
-);
-defparam \fifo_inst/reset_r_1_s1 .INIT=1'b1;
 SDPB \fifo_inst/Big.mem_Big.mem_0_0_s  (
 	.CLKA(WrClk),
-	.CEA(\fifo_inst/n23_7 ),
+	.CEA(\fifo_inst/n15_7 ),
 	.RESETA(GND),
 	.CLKB(RdClk),
-	.CEB(\fifo_inst/n27_3 ),
-	.RESETB(\fifo_inst/reset_r [1]),
+	.CEB(\fifo_inst/n19_3 ),
+	.RESETB(RdReset),
 	.OCE(GND),
 	.BLKSELA({GND, GND, GND}),
 	.BLKSELB({GND, GND, GND}),
@@ -1020,11 +993,11 @@ defparam \fifo_inst/Big.mem_Big.mem_0_0_s .BLK_SEL_0=3'b000;
 defparam \fifo_inst/Big.mem_Big.mem_0_0_s .BLK_SEL_1=3'b000;
 SDPB \fifo_inst/Big.mem_Big.mem_0_1_s  (
 	.CLKA(WrClk),
-	.CEA(\fifo_inst/n23_7 ),
+	.CEA(\fifo_inst/n15_7 ),
 	.RESETA(GND),
 	.CLKB(RdClk),
-	.CEB(\fifo_inst/n27_3 ),
-	.RESETB(\fifo_inst/reset_r [1]),
+	.CEB(\fifo_inst/n19_3 ),
+	.RESETB(RdReset),
 	.OCE(GND),
 	.BLKSELA({GND, GND, GND}),
 	.BLKSELB({GND, GND, GND}),
@@ -1041,11 +1014,11 @@ defparam \fifo_inst/Big.mem_Big.mem_0_1_s .BLK_SEL_0=3'b000;
 defparam \fifo_inst/Big.mem_Big.mem_0_1_s .BLK_SEL_1=3'b000;
 SDPB \fifo_inst/Big.mem_Big.mem_0_2_s  (
 	.CLKA(WrClk),
-	.CEA(\fifo_inst/n23_7 ),
+	.CEA(\fifo_inst/n15_7 ),
 	.RESETA(GND),
 	.CLKB(RdClk),
-	.CEB(\fifo_inst/n27_3 ),
-	.RESETB(\fifo_inst/reset_r [1]),
+	.CEB(\fifo_inst/n19_3 ),
+	.RESETB(RdReset),
 	.OCE(GND),
 	.BLKSELA({GND, GND, GND}),
 	.BLKSELB({GND, GND, GND}),
@@ -1062,11 +1035,11 @@ defparam \fifo_inst/Big.mem_Big.mem_0_2_s .BLK_SEL_0=3'b000;
 defparam \fifo_inst/Big.mem_Big.mem_0_2_s .BLK_SEL_1=3'b000;
 SDPB \fifo_inst/Big.mem_Big.mem_0_3_s  (
 	.CLKA(WrClk),
-	.CEA(\fifo_inst/n23_7 ),
+	.CEA(\fifo_inst/n15_7 ),
 	.RESETA(GND),
 	.CLKB(RdClk),
-	.CEB(\fifo_inst/n27_3 ),
-	.RESETB(\fifo_inst/reset_r [1]),
+	.CEB(\fifo_inst/n19_3 ),
+	.RESETB(RdReset),
 	.OCE(GND),
 	.BLKSELA({GND, GND, GND}),
 	.BLKSELB({GND, GND, GND}),
@@ -1118,7 +1091,7 @@ ALU \fifo_inst/rcnt_sub_3_s  (
 );
 defparam \fifo_inst/rcnt_sub_3_s .ALU_MODE=1;
 ALU \fifo_inst/rcnt_sub_4_s  (
-	.I0(\fifo_inst/n664_3 ),
+	.I0(\fifo_inst/n656_3 ),
 	.I1(GND),
 	.I3(GND),
 	.CIN(\fifo_inst/rcnt_sub_3_3 ),
@@ -1163,7 +1136,7 @@ ALU \fifo_inst/wcnt_sub_7_s  (
 );
 defparam \fifo_inst/wcnt_sub_7_s .ALU_MODE=1;
 ALU \fifo_inst/wcnt_sub_8_s  (
-	.I0(\fifo_inst/n732_3 ),
+	.I0(\fifo_inst/n724_3 ),
 	.I1(GND),
 	.I3(GND),
 	.CIN(\fifo_inst/wcnt_sub_7_3 ),
@@ -1171,44 +1144,44 @@ ALU \fifo_inst/wcnt_sub_8_s  (
 	.SUM(\fifo_inst/wcnt_sub [8])
 );
 defparam \fifo_inst/wcnt_sub_8_s .ALU_MODE=1;
-ALU \fifo_inst/n640_s0  (
+ALU \fifo_inst/n632_s0  (
 	.I0(\fifo_inst/Big.wptr [0]),
 	.I1(\fifo_inst/Big.rptr [0]),
 	.I3(GND),
 	.CIN(GND),
-	.COUT(\fifo_inst/n640_3 ),
-	.SUM(\fifo_inst/n640_1_SUM )
+	.COUT(\fifo_inst/n632_3 ),
+	.SUM(\fifo_inst/n632_1_SUM )
 );
-defparam \fifo_inst/n640_s0 .ALU_MODE=3;
-ALU \fifo_inst/n641_s0  (
+defparam \fifo_inst/n632_s0 .ALU_MODE=3;
+ALU \fifo_inst/n633_s0  (
 	.I0(\fifo_inst/Big.wptr [1]),
 	.I1(\fifo_inst/Big.rptr [1]),
 	.I3(GND),
-	.CIN(\fifo_inst/n640_3 ),
-	.COUT(\fifo_inst/n641_3 ),
-	.SUM(\fifo_inst/n641_1_SUM )
+	.CIN(\fifo_inst/n632_3 ),
+	.COUT(\fifo_inst/n633_3 ),
+	.SUM(\fifo_inst/n633_1_SUM )
 );
-defparam \fifo_inst/n641_s0 .ALU_MODE=3;
-ALU \fifo_inst/n642_s0  (
+defparam \fifo_inst/n633_s0 .ALU_MODE=3;
+ALU \fifo_inst/n634_s0  (
 	.I0(\fifo_inst/Big.wptr [2]),
 	.I1(\fifo_inst/Big.rptr [2]),
 	.I3(GND),
-	.CIN(\fifo_inst/n641_3 ),
-	.COUT(\fifo_inst/n642_3 ),
-	.SUM(\fifo_inst/n642_1_SUM )
+	.CIN(\fifo_inst/n633_3 ),
+	.COUT(\fifo_inst/n634_3 ),
+	.SUM(\fifo_inst/n634_1_SUM )
 );
-defparam \fifo_inst/n642_s0 .ALU_MODE=3;
-ALU \fifo_inst/n643_s0  (
+defparam \fifo_inst/n634_s0 .ALU_MODE=3;
+ALU \fifo_inst/n635_s0  (
 	.I0(\fifo_inst/Big.wptr [3]),
 	.I1(\fifo_inst/Big.rptr [3]),
 	.I3(GND),
-	.CIN(\fifo_inst/n642_3 ),
-	.COUT(\fifo_inst/n643_3 ),
-	.SUM(\fifo_inst/n643_1_SUM )
+	.CIN(\fifo_inst/n634_3 ),
+	.COUT(\fifo_inst/n635_3 ),
+	.SUM(\fifo_inst/n635_1_SUM )
 );
-defparam \fifo_inst/n643_s0 .ALU_MODE=3;
+defparam \fifo_inst/n635_s0 .ALU_MODE=3;
 INV \fifo_inst/wfull_val1_s8  (
-	.I(\fifo_inst/reset_w [1]),
+	.I(WrReset),
 	.O(\fifo_inst/wfull_val1_14 )
 );
 endmodule

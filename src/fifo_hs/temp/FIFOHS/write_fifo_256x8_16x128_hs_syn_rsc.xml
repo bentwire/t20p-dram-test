@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Module name="WRITE_FIFO_HS_Top" Register="77" Alu="14" Lut="49" Bsram="4"/>
+<Module name="WRITE_FIFO_HS_Top" Register="73" Alu="14" Lut="49" Bsram="4"/>

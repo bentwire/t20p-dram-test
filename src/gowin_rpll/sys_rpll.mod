@@ -1,13 +1,12 @@
 -series GW2A
--device GW2A-18
--device_version C
+-device GW2A-18C
 -package PBGA256
 -part_number GW2A-LV18PG256C8/I7
 
 
 -mod_name SYS_rPLL
 -file_name sys_rpll
--path /home/mike/gowin/projects/dram-test/src/gowin_rpll/
+-path F:/dram-test/src/gowin_rpll/
 -type PLL
 -rPll true
 -file_type vlg

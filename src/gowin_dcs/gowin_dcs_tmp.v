@@ -5,16 +5,18 @@
 //Part Number: GW2A-LV18PG256C8/I7
 //Device: GW2A-18
 //Device Version: C
-//Created Time: Wed Feb 22 19:54:17 2023
+//Created Time: Tue Feb 28 12:50:04 2023
 
 //Change the instance name and port connections to the signal names
 //--------Copy here to design--------
 
-    MEM_rPLL your_instance_name(
+    Gowin_DCS your_instance_name(
         .clkout(clkout_o), //output clkout
-        .lock(lock_o), //output lock
-        .clkoutd(clkoutd_o), //output clkoutd
-        .clkin(clkin_i) //input clkin
+        .clksel(clksel_i), //input [3:0] clksel
+        .clk0(clk0_i), //input clk0
+        .clk1(clk1_i), //input clk1
+        .clk2(clk2_i), //input clk2
+        .clk3(clk3_i) //input clk3
     );
 
 //--------Copy end-------------------
